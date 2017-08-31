@@ -17,7 +17,7 @@ public class Education
     private boolean educationIsArchived;
 
     @ManyToOne
-    Person educationPerson;
+    private Person educationPerson;
 
     public long getEducationId()
     {

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W6CHead"/>
+    <title>Resume Generator</title>
+    <link href="../css/custom.css" rel="stylesheet"/>
+
+</head>
+<body class="bg">
+<!--Navigation bar-->
+<div th:replace="base :: W6CNav"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-8">
+            <th:block th:if="${object.personId}!=0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${object.personFirstName}"></td>
+                    <td th:text="${object.personLastName}"></td>
+                    <td th:text="${object.personEmail}"></td>
+                </tr>
+                </tbody>
+            </table>
+            </th:block>
+            <th:block th:if="${object.educationId}!=0">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>School</th>
+                        <th>Degree</th>
+                        <th>Graduation Year</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${object.schoolName}"></td>
+                        <td th:text="${object.degree}"></td>
+                        <td th:text="${object.gradYear}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="base :: W6CJS"></th:block>
+
+</body>
+</html>

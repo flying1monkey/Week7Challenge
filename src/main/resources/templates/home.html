@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <th:block th:replace="base :: W6CHead"></th:block>
+    <link href="../css/custom.css" rel="stylesheet"/>
+    <title>Welcome!</title>
 </head>
-<body>
+<body class="bg">
+<th:block th:replace="base :: W6CNav"></th:block>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <h1>Welcome to the RoboResume app!</h1>
+            <p>What would you like to do now?</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addperson.html}">Add person information</a></p>
+                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addeducation.html}">Add education</a></p>
+                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addjob.html}">Add work experience</a></p>
+                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addskill.html}">Add a skill</a></p>
+                <p><a type="button" class="btn btn-outline-primary" th:href="@{/generateresume.html}">Generate a resume</a></p>
+                <p><a type="button" class="btn btn-outline-primary" th:href="@{/listperson.html}">List all people</a></p>
+        </div>
+    </div>
+</div>
 
+<th:block th:replace="base :: W6CJS"></th:block>
 </body>
 </html>

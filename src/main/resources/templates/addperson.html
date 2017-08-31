@@ -1,10 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W6CHead"/>
+    <title>Resume Generator</title>
+    <link href="../css/custom.css" rel="stylesheet"/>
+
 </head>
-<body>
+<body class="bg">
+<!--Navigation bar-->
+<div th:replace="base :: W6CNav"></div>
+
+
+<!--input-->
+<div class="container">
+    <form action="#" th:action="@{/addperson}" th:object="${newPerson}" method="post">
+        <div class="row justify-content-center">
+            <input type="hidden" th:field="*{personId}" />
+            <div class="col col-sm-4 form-group">
+                <label for="firstName">First name</label>
+                <input type="text" class="form-control" th:field="*{personFirstName}" id="firstName"
+                       placeholder="Given name"/>
+                <!--<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>-->
+
+            </div>
+            <div class="col col-sm-4 form-group">
+                <label for="lastName">Last name</label>
+                <input type="text" class="form-control" th:field="*{personLastName}" id="lastName" placeholder="Family name"/>
+                <!--<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>-->
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-8 form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" th:field="*{personEmail}" id="email" placeholder="name@example.com"/>
+                <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>-->
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-8">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:replace="base :: W6CJS"></th:block>
 
 </body>
 </html>
