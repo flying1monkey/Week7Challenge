@@ -19,8 +19,7 @@
             <input type="hidden" th:field="*{personId}" />
             <div class="col col-sm-4 form-group">
                 <label for="firstName">First name</label>
-                <input type="text" class="form-control" th:field="*{personFirstName}" id="firstName"
-                       placeholder="Given name"/>
+                <input type="text" class="form-control" th:field="*{personFirstName}" id="firstName" autofocus="autofocus" placeholder="Given name"/>
                 <!--<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>-->
 
             </div>

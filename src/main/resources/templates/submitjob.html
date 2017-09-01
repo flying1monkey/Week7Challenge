@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W6CHead"/>
+    <title>Resume Generator</title>
 </head>
 <body>
+<!--Navigation bar-->
+<div th:replace="base :: W6CNav"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-8">
+            <h1>You've added a new job item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Title</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>First Duty</th>
+                    <th>Second Duty</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${addjob.jobCompany}"></td>
+                    <td th:text="${addjob.jobTitle}"></td>
+                    <td th:text="${addjob.jobStartDate}"></td>
+                    <td th:text="${addjob.jobEndDate}"></td>
+                    <td th:text="${addjob.jobFirstDuty}"></td>
+                    <td th:text="${addjob.jobSecondDuty}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <a class="btn btn-primary" th:href="@{/addjob}" role="button">Add another job</a>
+    </div>
+</div>
+
+<th:block th:replace="base :: W6CJS"></th:block>
 
 </body>
 </html>

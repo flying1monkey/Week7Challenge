@@ -71,24 +71,42 @@ public class MainController
     @GetMapping("/addeducation/{personid}")
     public String addEducation(@PathVariable("personid") long personid, Model model)
     {
-        Education eduObj = new Education(personRepo.findOne(personid));
-        model.addAttribute("newEdu", eduObj);
-        System.out.println(eduObj.getEducationPerson().getPersonId());
+        model.addAttribute("currentPerson", personRepo.findOne(personid));
+        model.addAttribute("currentPersonId", personid);
+        model.addAttribute("newEdu", new Education());
         return "addeducation";
     }
+//    @GetMapping("/addeducation")
+//    public String addEducation(Model model)
+//    {
+//        model.addAttribute(personRepo.findAll());//show dropdown of people
+//        model.addAttribute("newEdu", new Education());
+//        return "addeducation";
+//    }
 
     @PostMapping("/addeducation")
-    public String submitEducation(@Valid @ModelAttribute("newEdu")Education edu, BindingResult result)
+    public String submitEducation(@Valid @ModelAttribute("newEdu")Education edu, @RequestParam("personId") long currentId, BindingResult result, Model model)
     {
         if(result.hasErrors())
         {
             return "addeducation";
         }
+        //save newly created education object
         edRepo.save(edu);
-        //System.out.println(edu.getEducationPerson().getPersonId());
+        //get person from passed long and
+        Person current = personRepo.findOne(currentId);
+        //add newly created education object to Person's education set
+        current.addEducationToPerson(edu);
+        //Save person
+        personRepo.save(current);
 
+        //send education and person objects to submiteducation
+        model.addAttribute("currentPerson", current);
+        model.addAttribute("currentEdu", edu);
         return "submiteducation";
     }
+
+
     /*********************************************
      *
      * Job pages
@@ -97,10 +115,23 @@ public class MainController
     @GetMapping("/addjob")
     public String addJob(Model model)
     {
+        model.addAttribute("people", personRepo.findAll());
         model.addAttribute("newJob", new Job());
         return "addjob";
     }
 
+    @PostMapping("/addjob")
+    public String submitJob(@RequestParam("selectperson")long currentPersonId, @ModelAttribute("newJob") Job job, Model model)
+    {
+        jobRepo.save(job);
+        Person current = personRepo.findOne(currentPersonId);
+        current.addJobToPerson(job);
+        personRepo.save(current);
+
+        model.addAttribute("currentPerson", current);
+
+        return "submitjob";
+    }
     /*********************************************
      *
      * Skill pages

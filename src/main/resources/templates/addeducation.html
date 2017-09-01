@@ -13,12 +13,17 @@
 
 <!--input-->
 <div class="container">
-    <h1>You're adding a new education item for <span th:text="${newEdu.educationPerson.personFirstName}+' '+${newEdu.educationPerson.personLastName}"/></h1>
-
+    <div class="row justify-content-center">
+        <div class="col col-sm-4 form-group">
+            <h1>You're adding a new education item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
+        </div>
+    </div>
     <form action="#" th:action="@{/addeducation}" th:object="${newEdu}" method="post">
         <div class="row justify-content-center">
             <div class="col col-sm-4 form-group">
                 <input type="hidden" th:field="*{educationId}"/>
+                <input type="hidden" th:field="${currentPerson.personId}"/>
+
                 <label for="school">School</label>
                 <input type="text" class="form-control" th:field="*{educationSchoolName}" id="school" placeholder="College" autofocus="autofocus"/>
                 <!--<span th:if="${#fields.hasErrors('schoolName')}" th:errors="*{schoolName}"/>-->

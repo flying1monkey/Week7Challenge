@@ -19,8 +19,11 @@ public class Job
     //for "deletions"
     private boolean jobIsArchived;
 
-    @ManyToOne
-    private Person jobPerson;
+    //Constructor
+    public Job()
+    {
+        this.jobIsArchived=false;
+    }
 
     public long getJobId()
     {
@@ -102,13 +105,4 @@ public class Job
         this.jobIsArchived = jobIsArchived;
     }
 
-    public Person getJobPerson()
-    {
-        return jobPerson;
-    }
-
-    public void setJobPerson(Person jobPerson)
-    {
-        this.jobPerson = jobPerson;
-    }
 }

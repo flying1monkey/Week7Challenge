@@ -37,6 +37,24 @@ public class Person
         setPersonIsArchived(false);
     }
 
+    public void addEducationToPerson(Education edu)
+    {
+        this.educationSet.add(edu);
+    }
+
+    public void addJobToPerson(Job job)
+    {
+        this.jobSet.add(job);
+    }
+    public void addSkillToPerson(Skill skill)
+    {
+        this.skillSet.add(skill);
+    }
+
+    /************************
+     * Getters and setters
+     ************************/
+
     public long getPersonId()
     {
         return personId;

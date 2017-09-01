@@ -1,10 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W6CHead"/>
+    <title>Resume Generator</title>
+
 </head>
 <body>
-Job
+<!--Navigation bar-->
+<div th:replace="base :: W6CNav"></div>
+
+<div class="container" >
+    <div class="row justify-content-center">
+        <div class="col col-sm-6 form-group">
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col col-sm-6 form-group">
+            <form action="#" th:action="@{/addjob}" th:object="${newJob}" method="post">
+                <input type="hidden" th:field="*{jobId}"/>
+                <!--<input type="hidden" th:field="${currentPerson.personId}"/>-->
+                <h1>You're adding a new job item for: </h1>
+                <select name="selectperson">
+                    <option th:each="person:${people}" th:value="${person.personId}" th:text="${person.personFirstName}+' '+${person.personLastName}"></option>
+                </select>
+
+                <div class="row justify-content-center">
+                    <div class="col col-sm-6 form-group">
+                        <label for="co">Company</label>
+                        <input type="text" class="form-control" th:field="*{jobCompany}" id="co" placeholder="Company" autofocus="autofocus"/>
+                        <!--<span th:if="${#fields.hasErrors('company')}" th:errors="*{company}"/>-->
+                    </div>
+                    <div class="col col-sm-6 form-group">
+                        <label for="jobtitle">Title</label>
+                        <input type="text" class="form-control" th:field="*{jobTitle}" id="jobtitle" placeholder="Job title"/>
+                        <!--<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"/>-->
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col col-sm-6 form-group">
+                        <label for="sdate">Start Date</label>
+                        <input type="date" class="form-control" th:field="*{jobStartDate}" id="sdate"/>
+                        <!--<span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"/>-->
+                    </div>
+                    <div class="col col-sm-6 form-group">
+                        <label for="edate">End Date</label>
+                        <input type="date" class="form-control" th:field="*{jobEndDate}" id="edate"/>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col col-sm-6 form-group">
+                        <label for="duty1">Job Duty</label>
+                        <input type="text" class="form-control" th:field="*{jobFirstDuty}" id="duty1" placeholder="First duty"/>
+                    </div>
+                    <div class="col col-sm-6 form-group">
+                        <label for="duty2">Job Duty</label>
+                        <input type="text" class="form-control" th:field="*{jobSecondDuty}" id="duty2" placeholder="Second duty"/>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col col-sm-8">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="base :: W6CJS"></th:block>
 </body>
 </html>
