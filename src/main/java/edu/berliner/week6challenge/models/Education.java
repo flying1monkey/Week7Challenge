@@ -19,6 +19,17 @@ public class Education
     @ManyToOne
     private Person educationPerson;
 
+    //Constructors
+    public Education(Person currentPerson)
+    {
+        this.setEducationIsArchived(false);
+        this.setEducationPerson(currentPerson);
+    }
+    public Education()
+    {
+        this.setEducationIsArchived(false);
+    }
+
     public long getEducationId()
     {
         return educationId;

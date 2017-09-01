@@ -1,10 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W6CHead"/>
+    <title>Resume Generator</title>
+
 </head>
 <body>
-Education
+<!--Navigation bar-->
+<div th:replace="base :: W6CNav"></div>
+
+
+<!--input-->
+<div class="container">
+    <h1>You're adding a new education item for <span th:text="${newEdu.educationPerson.personFirstName}+' '+${newEdu.educationPerson.personLastName}"/></h1>
+
+    <form action="#" th:action="@{/addeducation}" th:object="${newEdu}" method="post">
+        <div class="row justify-content-center">
+            <div class="col col-sm-4 form-group">
+                <input type="hidden" th:field="*{educationId}"/>
+                <label for="school">School</label>
+                <input type="text" class="form-control" th:field="*{educationSchoolName}" id="school" placeholder="College" autofocus="autofocus"/>
+                <!--<span th:if="${#fields.hasErrors('schoolName')}" th:errors="*{schoolName}"/>-->
+
+            </div>
+            <div class="col col-sm-4 form-group">
+                <label for="degree">Degree</label>
+                <input type="text" class="form-control" th:field="*{educationDegree}" id="degree" placeholder="Bachelor's, Doctorate"/>
+                <!--<span th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"/>-->
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-8 form-group">
+                <label for="year">Graduation Year</label>
+                <input type="number" class="form-control" th:field="*{educationGradYear}" id="year" placeholder="2017"/>
+                <!--<span th:if="${#fields.hasErrors('gradYear')}" th:errors="*{gradYear}"/>-->
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-8">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:replace="base :: W6CJS"></th:block>
+
 </body>
 </html>

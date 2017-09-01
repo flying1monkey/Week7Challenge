@@ -40,17 +40,18 @@ public class MainController
         return "home";
     }
 
-    /*
+    /*********************************************
      *
      * Person pages
      *
-     */
+     *********************************************/
     @GetMapping("/addperson")
     public String addPerson(Model model)
     {
         model.addAttribute("newPerson", new Person());
         return "addperson";
     }
+
     @PostMapping("/addperson")
     public String submitEducation(@Valid @ModelAttribute("newPerson")Person person, BindingResult result)
     {
@@ -62,34 +63,37 @@ public class MainController
         return "submitperson";
     }
 
-    /*
+    /*********************************************
      *
      * Education pages
      *
-     */
-    @GetMapping("/addeducation/{id}")
-    public String addEducation(@PathVariable("id") long id, Model model)
+     *********************************************/
+    @GetMapping("/addeducation/{personid}")
+    public String addEducation(@PathVariable("personid") long personid, Model model)
     {
-        Education eduObj = new Education();
-        eduObj.setEducationPerson(personRepo.findOne(id));
+        Education eduObj = new Education(personRepo.findOne(personid));
         model.addAttribute("newEdu", eduObj);
+        System.out.println(eduObj.getEducationPerson().getPersonId());
         return "addeducation";
     }
+
     @PostMapping("/addeducation")
-    public String submitEducation(@Valid @ModelAttribute("newEducation")Education edu, BindingResult result)
+    public String submitEducation(@Valid @ModelAttribute("newEdu")Education edu, BindingResult result)
     {
         if(result.hasErrors())
         {
             return "addeducation";
         }
         edRepo.save(edu);
+        //System.out.println(edu.getEducationPerson().getPersonId());
+
         return "submiteducation";
     }
-    /*
+    /*********************************************
      *
      * Job pages
      *
-     */
+     *********************************************/
     @GetMapping("/addjob")
     public String addJob(Model model)
     {
@@ -97,11 +101,11 @@ public class MainController
         return "addjob";
     }
 
-    /*
+    /*********************************************
      *
      * Skill pages
      *
-     */
+     *********************************************/
     @GetMapping("/addskill")
     public String addSkill(Model model)
     {
@@ -109,9 +113,9 @@ public class MainController
         return "addskill";
     }
 
-    /*
+    /*********************************************
      *
      * Resume/final pages
      *
-     */
+     *********************************************/
 }

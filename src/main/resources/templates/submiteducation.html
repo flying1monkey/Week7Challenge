@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W6CHead"/>
+    <title>Resume Generator</title>
+</head>
+<body>
+<!--Navigation bar-->
+<div th:replace="base :: W6CNav"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-8">
+            <!--<h1>You've added a new education item for <span th:text="${newEdu.educationPerson.personFirstName}+' '+${newEdu.educationPerson.personLastName}"/></h1>-->
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>School</th>
+                    <th>Degree</th>
+                    <th>Graduation Year</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+
+                    <td th:text="${newEdu.educationPerson.personFirstName}"></td>
+                    <td th:text="${newEdu.educationSchoolName}"></td>
+                    <td th:text="${newEdu.educationDegree}"></td>
+                    <td th:text="${newEdu.educationGradYear}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <!--<a class="btn btn-primary" th:href="@{/addeducation/{personid}(personid=${newEdu.educationPerson.personId})}" role="button">Add another school</a>-->
+    </div>
+</div>
+
+<th:block th:replace="base :: W6CJS"></th:block>
+
+</body>
+</html>
