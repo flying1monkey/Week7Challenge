@@ -5,7 +5,7 @@
     <th:block th:replace="base :: W6CHead"/>
     <title>Resume Generator</title>
 </head>
-<body>
+<body class="bg">
 <!--Navigation bar-->
 <div th:replace="base :: W6CNav"></div>
 
@@ -23,18 +23,17 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${currentEdu.educationSchoolName}"></td>
-                    <td th:text="${currentEdu.educationDegree}"></td>
-                    <td th:text="${currentEdu.educationGradYear}"></td>
+                    <td th:text="${newEducation.educationSchoolName}"></td>
+                    <td th:text="${newEducation.educationDegree}"></td>
+                    <td th:text="${newEducation.educationGradYear}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="row justify-content-center">
-        <!--<a class="btn btn-primary" th:href="@{/addeducation/{personid}(personid=${currentPerson.personId})}" role="button">Add another school</a>-->
-        <!--<a class="btn btn-primary" th:href="@{/addjob.html/{personid}(personid=${currentPerson.personId})}" role="button">Add a job</a>-->
-        <!--<a class="btn btn-primary" th:href="@{/addskill.html/{personid}(personid=${currentPerson.personId})}" role="button">Add a skill</a>-->
+        <a class="btn btn-primary" th:href="@{/addeducation/{id}(id=${currentPerson.personId})}" role="button">Add another school</a>
+
     </div>
 </div>
 

@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W6CHead"/>
+    <title>Resume Generator</title>
 </head>
-<body>
+<body class="bg">
+<!--Navigation bar-->
+<div th:replace="base :: W6CNav"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Skill</th>
+                    <th>Level</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${newSkill.skillName}"></td>
+                    <td th:text="${newSkill.skillLevel}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <a class="btn btn-primary" th:href="@{/addskill/{id}(id=${currentPerson.personId})}" role="button">Add another skill</a>
+        <a class="btn btn-primary" th:href="@{/addjob/{id}(id=${currentPerson.personId})}" role="button">Add another job</a>
+
+    </div>
+</div>
+
+<th:block th:replace="base :: W6CJS"></th:block>
 
 </body>
 </html>

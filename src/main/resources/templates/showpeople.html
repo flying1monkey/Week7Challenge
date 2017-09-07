@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W6CHead"/>
+    <title>Resume Generator</title>
+
+</head>
+<body class="bg">
+
+<!--Navigation bar-->
+<div th:replace="base :: W6CNav"></div>
+
+
+<!--input-->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-6 form-group">
+            <table content="center" border="1">
+                <tr th:each="person : ${allPeople}">
+                   <td th:text="${person.personFirstName}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<th:block th:replace="base :: W6CJS"></th:block>
+
+
+</body>
+</html>

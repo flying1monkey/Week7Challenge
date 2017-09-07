@@ -7,7 +7,6 @@
 
 </head>
 <body class="bg">
-
 <!--Navigation bar-->
 <div th:replace="base :: W6CNav"></div>
 
@@ -16,21 +15,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col col-sm-10 form-group">
-            <form action="#" th:action="@{/addeducation}" th:object="${newEducation}" method="post">
-                <input type="hidden" th:field="*{educationId}"/>
-                <div class="col col-sm-12 form-group">
-                    <h1>You're adding a new education item for: </h1>
-                    <select name="selectperson">
-                        <option th:each="person:${people}" th:value="${person.personId}"
-                                th:text="${person.personFirstName}+' '+${person.personLastName}"></option>
-                    </select>
-                </div>
+            <h1>You're adding a new education item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
+            <form action="#" th:action="@{/addeducation2}" th:object="${newEducation}" method="post">
                 <div class="row justify-content-center">
                     <div class="col col-sm-6 form-group">
+                        <input type="hidden" th:field="*{educationId}"/>
+                        <input type="hidden" th:field="${currentPerson.personId}"/>
+
                         <label for="school">School</label>
                         <input type="text" class="form-control" th:field="*{educationSchoolName}" id="school"
                                placeholder="College" autofocus="autofocus"/>
                         <!--<span th:if="${#fields.hasErrors('schoolName')}" th:errors="*{schoolName}"/>-->
+
                     </div>
                     <div class="col col-sm-6 form-group">
                         <label for="degree">Degree</label>
@@ -56,7 +52,6 @@
         </div>
     </div>
 </div>
-
 
 <th:block th:replace="base :: W6CJS"></th:block>
 

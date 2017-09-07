@@ -15,19 +15,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col col-sm-10 form-group">
-            <form action="#" th:action="@{/addskill}" th:object="${newSkill}" method="post">
-                <input type="hidden" th:field="*{skillId}"/>
-                <div class="row justify-content-center">
-                    <div class="col col-sm-12 form-group">
-                        <h1>You're adding a new skill item for: </h1>
-                        <select name="selectperson">
-                            <option th:each="person:${people}" th:value="${person.personId}"
-                                    th:text="${person.personFirstName}+' '+${person.personLastName}"></option>
-                        </select>
-                    </div>
-                </div>
+            <div class="col col-sm-12 form-group">
+                <h1>You're adding a new skill item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
+            </div>
+            <form action="#" th:action="@{/addskill2}" th:object="${newSkill}" method="post">
                 <div class="row justify-content-center">
                     <div class="col col-sm-6 form-group">
+                        <input type="hidden" th:field="*{skillId}"/>
                         <label for="skill">Skill</label>
                         <input type="text" class="form-control" th:field="*{skillName}" id="skill"
                                placeholder="Juggling" autofocus="autofocus"/>
