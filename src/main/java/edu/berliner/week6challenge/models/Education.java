@@ -1,6 +1,9 @@
 package edu.berliner.week6challenge.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Education
@@ -9,8 +12,11 @@ public class Education
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long educationId;
 
+    @NotEmpty
     private String educationSchoolName;
+    @NotNull
     private long educationGradYear;
+    @NotEmpty
     private String educationDegree;
 
     //For "deletions"

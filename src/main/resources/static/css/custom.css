@@ -14,3 +14,11 @@
 .container {
     background-color: white;
 }
+.resumehead {
+    text-align: center;
+    font-weight: bold;
+}
+
+.resumesubjecthead {
+    font-weight: bold;
+}

@@ -15,7 +15,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col col-sm-10 form-group">
-            <h1>You're adding a new education item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
+            <h1>You're adding or editing a new education item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
             <form action="#" th:action="@{/addeducation2}" th:object="${newEducation}" method="post">
                 <div class="row justify-content-center">
                     <div class="col col-sm-6 form-group">

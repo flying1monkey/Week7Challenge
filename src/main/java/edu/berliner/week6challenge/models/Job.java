@@ -1,5 +1,7 @@
 package edu.berliner.week6challenge.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,11 +11,17 @@ public class Job
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long jobId;
 
+    @NotEmpty
     private String jobCompany;
+    @NotEmpty
     private String jobTitle;
+    @NotEmpty
     private String jobStartDate;
+    @NotEmpty
     private String jobEndDate;
+    @NotEmpty
     private String jobFirstDuty;
+    @NotEmpty
     private String jobSecondDuty;
 
     //for "deletions"

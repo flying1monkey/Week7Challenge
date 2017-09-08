@@ -1,6 +1,7 @@
 package edu.berliner.week6challenge.models;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,8 +14,11 @@ public class Person
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long personId;
 
+    @NotEmpty
     private String personFirstName;
+    @NotEmpty
     private String personLastName;
+    @NotEmpty
     private String personEmail;
 
     //for "deletions"
@@ -46,6 +50,7 @@ public class Person
     {
         this.jobSet.add(job);
     }
+
     public void addSkillToPerson(Skill skill)
     {
         this.skillSet.add(skill);

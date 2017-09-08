@@ -1,10 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W6CHead"/>
+    <title>Resume Generator</title>
+
 </head>
-<body>
-Sorry Fi
+<body class="bg">
+
+<!--Navigation bar-->
+<div th:replace="base :: W6CNav"></div>
+
+
+<!--input-->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-6 form-group">
+            <h1>Roboresume</h1>
+            <h3>Here's <span th:text="${person.personFirstName} + ' ' + ${person.personLastName}"></span>'s Resume</h3>
+            <br />
+            <div class="resumehead">
+                <p><h3 th:text="${person.personFirstName} + ' ' + ${person.personLastName}"/></p>
+                <p><h4 th:text="${person.personEmail}"/></p>
+            </div>
+            <hr />
+            <div class="resumesubjecthead">
+                Education
+            </div>
+            <div  th:each="edu : ${person.educationSet}">
+                <p th:text="${edu.educationSchoolName}"></p>
+                <p th:text="${edu.educationDegree}+ ', '+${edu.educationGradYear}"></p>
+            </div>
+            <div class="resumesubjecthead">
+                Experience
+            </div>
+            <div th:each="exp : ${person.jobSet}">
+                <p th:text="${exp.jobCompany}+', '+${exp.jobTitle}"></p>
+                <p th:text="${exp.jobStartDate}+'-'+${exp.jobEndDate}"></p>
+                <ul>
+                    <li th:text="${exp.jobFirstDuty}"></li>
+                    <li th:text="${exp.jobSecondDuty}"></li>
+                </ul>
+            </div>
+            <div class="resumesubjecthead">
+                Skills
+            </div>
+            <div th:each="ski : ${person.skillSet}">
+                <p th:text="${ski.skillName}+', '+${ski.skillLevel}"/>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="base :: W6CJS"></th:block>
+
+
 </body>
 </html>

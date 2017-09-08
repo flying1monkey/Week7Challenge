@@ -19,7 +19,7 @@
             <form action="#" th:action="@{/addeducation}" th:object="${newEducation}" method="post">
                 <input type="hidden" th:field="*{educationId}"/>
                 <div class="col col-sm-12 form-group">
-                    <h1>You're adding a new education item for: </h1>
+                    <h1>You're adding or editing a new education item for: </h1>
                     <select name="selectperson">
                         <option th:each="person:${people}" th:value="${person.personId}"
                                 th:text="${person.personFirstName}+' '+${person.personLastName}"></option>

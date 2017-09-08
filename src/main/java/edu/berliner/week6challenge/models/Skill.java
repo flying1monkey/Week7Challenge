@@ -1,5 +1,7 @@
 package edu.berliner.week6challenge.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,7 +11,9 @@ public class Skill
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long skillId;
 
+    @NotEmpty
     private String skillName;
+    @NotEmpty
     private String skillLevel;
 
     //for "deletions"

@@ -63,6 +63,14 @@ public class MainController
         return "submitperson";
     }
 
+    @GetMapping("/addperson/{personId}")
+    public String addPerson(@PathVariable("personId")long personId, Model model)
+    {
+
+        model.addAttribute("newPerson", personRepo.findOne(personId));
+        return "addperson";
+    }
+
     /*********************************************
      *
      * Education pages
@@ -235,11 +243,13 @@ public class MainController
      * Resume/final pages
      *
      *********************************************/
-    @RequestMapping("/generateresume")
-    public String generate()
+    @RequestMapping("/generateresume/{personid}")
+    public String generate(@PathVariable("personid")long personId, Model model)
     {
+        model.addAttribute("person", personRepo.findOne(personId));
         return "generateresume";
     }
+
     @RequestMapping("/listperson")
     public String listPeople(Model model)
     {
