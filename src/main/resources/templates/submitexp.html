@@ -2,17 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!--header css declarations-->
-    <th:block th:replace="base :: W6CHead"/>
+    <th:block th:replace="base :: W7CHead"/>
     <title>Resume Generator</title>
 </head>
 <body class="bg">
 <!--Navigation bar-->
-<div th:replace="base :: W6CNav"></div>
+<div th:replace="base :: W7CNav"></div>
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col col-sm-8">
-            <h1>You've added a new job item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
+            <h1>You've added a new experience item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
 
             <table class="table">
                 <thead>
@@ -27,23 +27,23 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${newJob.jobCompany}"></td>
-                    <td th:text="${newJob.jobTitle}"></td>
-                    <td th:text="${newJob.jobStartDate}"></td>
-                    <td th:text="${newJob.jobEndDate}"></td>
-                    <td th:text="${newJob.jobFirstDuty}"></td>
-                    <td th:text="${newJob.jobSecondDuty}"></td>
+                    <td th:text="${newExp.expCompany}"></td>
+                    <td th:text="${newExp.expTitle}"></td>
+                    <td th:text="${newExp.expStartDate}"></td>
+                    <td th:text="${newExp.expEndDate}"></td>
+                    <td th:text="${newExp.expFirstDuty}"></td>
+                    <td th:text="${newExp.expSecondDuty}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="row justify-content-center">
-        <a class="btn btn-primary" th:href="@{/addjob/{id}(id=${currentPerson.personId})}" role="button">Add another job</a>
+        <a class="btn btn-primary" th:href="@{/addexp/{id}(id=${currentPerson.personId})}" role="button">Add another experience</a>
     </div>
 </div>
 
-<th:block th:replace="base :: W6CJS"></th:block>
+<th:block th:replace="base :: W7CJS"></th:block>
 
 </body>
 </html>

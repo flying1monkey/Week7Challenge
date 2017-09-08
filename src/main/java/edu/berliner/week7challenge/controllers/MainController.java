@@ -1,20 +1,17 @@
-package edu.berliner.week6challenge.controllers;
+package edu.berliner.week7challenge.controllers;
 
-import edu.berliner.week6challenge.models.Education;
-import edu.berliner.week6challenge.models.Job;
-import edu.berliner.week6challenge.models.Person;
-import edu.berliner.week6challenge.models.Skill;
-import edu.berliner.week6challenge.repositories.EducationRepository;
-import edu.berliner.week6challenge.repositories.JobRepository;
-import edu.berliner.week6challenge.repositories.PersonRepository;
-import edu.berliner.week6challenge.repositories.SkillRepository;
+import edu.berliner.week7challenge.models.*;
+import edu.berliner.week7challenge.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class MainController
@@ -22,22 +19,36 @@ public class MainController
     @Autowired
     EducationRepository edRepo;
     @Autowired
-    JobRepository jobRepo;
+    ExperienceRepository experienceRepository;
     @Autowired
     PersonRepository personRepo;
     @Autowired
     SkillRepository skillRepo;
+    @Autowired
+    RoleSecRepository roleRepo;
+    @Autowired
+    UserSecRepository userRepo;
 
 
-    @RequestMapping("/")
-    public String forceLogin()
-    {
-        return "login";
-    }
-    @RequestMapping("/home")
-    public String welcomePageAgain()
+    @RequestMapping({"/home","/"})
+    public String welcomePage()
     {
         return "home";
+    }
+
+    @RequestMapping("/aboutme")
+    public String aboutMe(Model model, Principal principal)
+    {
+        UserSec user = userRepo.findByUsername(principal.getName());
+        model.addAttribute("currentuser", user);
+        /*
+         * UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+         * System.out.println("User has authorities: " + userDetails.getAuthorities());
+         */
+        /*
+         * GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getSecRoleName());
+         */
+        return "aboutme";
     }
 
     /*********************************************
@@ -89,7 +100,7 @@ public class MainController
     @PostMapping("/addeducation")
     public String submitEducationAskForPerson(@RequestParam("selectperson")long currentPersonId, @ModelAttribute("newEducation") Education edu, Model model)
     {
-        edRepo.save(edu);
+        //edRepo.save(edu);
         Person current = personRepo.findOne(currentPersonId);
         current.addEducationToPerson(edu);
         personRepo.save(current);
@@ -114,7 +125,7 @@ public class MainController
     {
 
         //save newly created education object
-        edRepo.save(edu);
+        //edRepo.save(edu);
         //get person from passed long and
         Person current = personRepo.findOne(currentId);
         //add newly created education object to Person's education set
@@ -131,57 +142,57 @@ public class MainController
 
     /*********************************************
      *
-     * Job pages
+     * Experience pages
      *
      *********************************************/
     //Don't know person
-    @GetMapping("/addjob")
-    public String addJobAskForPerson(Model model)
+    @GetMapping("/addexp")
+    public String addExpAskForPerson(Model model)
     {
         model.addAttribute("people", personRepo.findAll());
         model.addAttribute("currentPerson", null);
-        model.addAttribute("newJob", new Job());
-        return "addjob";
+        model.addAttribute("newexp", new Experience());
+        return "addexp";
     }
 
-    @PostMapping("/addjob")
-    public String submitJobAskForPerson(@RequestParam("selectperson")long currentPersonId, @ModelAttribute("newJob") Job job, Model model)
+    @PostMapping("/addexp")
+    public String submitExpAskForPerson(@RequestParam("selectperson")long currentPersonId, @ModelAttribute("newExp") Experience experience, Model model)
     {
-        jobRepo.save(job);
+        experienceRepository.save(experience);
         Person current = personRepo.findOne(currentPersonId);
-        current.addJobToPerson(job);
+        current.addExpToPerson(experience);
         personRepo.save(current);
 
         model.addAttribute("currentPerson", current);
 
-        return "submitjob";
+        return "submitexp";
     }
     //Already know person
-    @GetMapping("/addjob/{personid}")
-    public String addJobSpecificPerson(@PathVariable("personid") long personid, Model model)
+    @GetMapping("/addexp/{personid}")
+    public String addExpSpecificPerson(@PathVariable("personid") long personid, Model model)
     {
         model.addAttribute("currentPerson", personRepo.findOne(personid));
         model.addAttribute("currentPersonId", personid);
-        model.addAttribute("newJob", new Job());
-        return "addjob2";
+        model.addAttribute("newExp", new Experience());
+        return "addexp2";
     }
-    @PostMapping("/addjob2")
-    public String submitJobSpecificPerson(@ModelAttribute("newJob")Job job, @RequestParam("personId") long currentId, Model model)
+    @PostMapping("/addexp2")
+    public String submitExpSpecificPerson(@ModelAttribute("newExp")Experience experience, @RequestParam("personId") long currentId, Model model)
     {
 
         //save newly created education object
-        jobRepo.save(job);
+        experienceRepository.save(experience);
         //get person from passed long and
         Person current = personRepo.findOne(currentId);
         //add newly created education object to Person's education set
-        current.addJobToPerson(job);
+        current.addExpToPerson(experience);
         //Save person
         personRepo.save(current);
 
-        //send education and person objects to submitjob
+        //send education and person objects to submitexp
         model.addAttribute("currentPerson", current);
-        model.addAttribute("currentJob", job);
-        return "submitjob";
+        model.addAttribute("currentExp", experience);
+        return "submitexp";
     }
     /*********************************************
      *
@@ -210,6 +221,7 @@ public class MainController
 
         return "submitskill";
     }
+
     //Already know person
     @GetMapping("/addskill/{personid}")
     public String addSkillSpecificPerson(@PathVariable("personid") long personid, Model model)
@@ -219,6 +231,7 @@ public class MainController
         model.addAttribute("newSkill", new Skill());
         return "addskill2";
     }
+
     @PostMapping("/addskill2")
     public String submitSkillSpecificPerson(@ModelAttribute("newSkill")Skill skill, @RequestParam("personId") long currentId, Model model)
     {
@@ -249,6 +262,14 @@ public class MainController
         model.addAttribute("person", personRepo.findOne(personId));
         return "generateresume";
     }
+    @GetMapping("/generate")
+    public String generateGetPerson(Model model)
+    {
+        model.addAttribute("allPeople", personRepo.findAll());
+        return "generate";
+    }
+
+
 
     @RequestMapping("/listperson")
     public String listPeople(Model model)
@@ -266,5 +287,22 @@ public class MainController
     public String login()
     {
         return "login";
+    }
+
+    @GetMapping("/signup")
+    public String signup(Model model)
+    {
+        model.addAttribute("newuser", new UserSec());
+        return "signup";
+    }
+
+    @PostMapping("/signup")
+    public String addNewUser(@ModelAttribute("newuser") UserSec user, @RequestParam("selectrole") String role)
+    {
+
+        user.addSecRole(roleRepo.findBySecRoleName(role)); //addRole is equivalent to my addToCollection()
+        userRepo.save(user);
+
+        return "home";
     }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W7CHead"/>
+    <title>Resume Generator</title>
+
+</head>
+<body class="bg">
+
+<!--Navigation bar-->
+<div th:replace="base :: W7CNav"></div>
+
+
+<!--input-->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-6 form-group">
+            <h1>Roboresume</h1>
+            <h3>Who's resume would you like to view?</h3>
+            <div class="row justify-content-center">
+                <div class="col col-sm-12 form-group">
+                    <ul th:each="person:${allPeople}">
+                       <li><a th:href="@{generateresume/{id}(id=${person.personId})}" th:text="${person.personFirstName}+' '+${person.personLastName}"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="base :: W7CJS"></th:block>
+
+
+</body>
+</html>

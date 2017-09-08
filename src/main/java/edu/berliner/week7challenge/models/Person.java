@@ -1,6 +1,5 @@
-package edu.berliner.week6challenge.models;
+package edu.berliner.week7challenge.models;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -24,19 +23,19 @@ public class Person
     //for "deletions"
     private boolean personIsArchived;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Education> educationSet;
 
-    @OneToMany
-    public Set<Job> jobSet;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public Set<Experience> experienceSet;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Skill> skillSet;
 
     public Person()
     {
         Set<Education> educationSet = new HashSet<Education>();
-        Set<Job> jobSet = new HashSet<Job>();
+        Set<Experience> experienceSet = new HashSet<Experience>();
         Set<Skill> skillSet = new HashSet<Skill>();
         setPersonIsArchived(false);
     }
@@ -46,9 +45,9 @@ public class Person
         this.educationSet.add(edu);
     }
 
-    public void addJobToPerson(Job job)
+    public void addExpToPerson(Experience experience)
     {
-        this.jobSet.add(job);
+        this.experienceSet.add(experience);
     }
 
     public void addSkillToPerson(Skill skill)
@@ -120,14 +119,14 @@ public class Person
         this.educationSet = educationSet;
     }
 
-    public Set<Job> getJobSet()
+    public Set<Experience> getExperienceSet()
     {
-        return jobSet;
+        return experienceSet;
     }
 
-    public void setJobSet(Set<Job> jobSet)
+    public void setExperienceSet(Set<Experience> experienceSet)
     {
-        this.jobSet = jobSet;
+        this.experienceSet = experienceSet;
     }
 
     public Set<Skill> getSkillSet()

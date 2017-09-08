@@ -1,12 +1,13 @@
-package edu.berliner.week6challenge;
+package edu.berliner.week7challenge;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Week6challengeApplication {
+public class Week7challengeApplication
+{
 
 	public static void main(String[] args) {
-		SpringApplication.run(Week6challengeApplication.class, args);
+		SpringApplication.run(Week7challengeApplication.class, args);
 	}
 }

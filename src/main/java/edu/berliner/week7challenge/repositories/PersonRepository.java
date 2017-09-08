@@ -1,6 +1,6 @@
-package edu.berliner.week6challenge.repositories;
+package edu.berliner.week7challenge.repositories;
 
-import edu.berliner.week6challenge.models.Person;
+import edu.berliner.week7challenge.models.Person;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PersonRepository extends CrudRepository<Person,Long>

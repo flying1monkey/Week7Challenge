@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!--header css declarations-->
-    <th:block th:replace="base :: W6CHead"/>
+    <th:block th:replace="base :: W7CHead"/>
     <title>Resume Generator</title>
 
 </head>
 <body class="bg">
 
 <!--Navigation bar-->
-<div th:replace="base :: W6CNav"></div>
+<div th:replace="base :: W7CNav"></div>
 
 
 <!--input-->
@@ -34,12 +34,12 @@
             <div class="resumesubjecthead">
                 Experience
             </div>
-            <div th:each="exp : ${person.jobSet}">
-                <p th:text="${exp.jobCompany}+', '+${exp.jobTitle}"></p>
-                <p th:text="${exp.jobStartDate}+'-'+${exp.jobEndDate}"></p>
+            <div th:each="exp : ${person.experienceSet}">
+                <p th:text="${exp.expCompany}+', '+${exp.expTitle}"></p>
+                <p th:text="${exp.expStartDate}+'-'+${exp.expEndDate}"></p>
                 <ul>
-                    <li th:text="${exp.jobFirstDuty}"></li>
-                    <li th:text="${exp.jobSecondDuty}"></li>
+                    <li th:text="${exp.expFirstDuty}"></li>
+                    <li th:text="${exp.expSecondDuty}"></li>
                 </ul>
             </div>
             <div class="resumesubjecthead">
@@ -51,7 +51,7 @@
         </div>
     </div>
 </div>
-<th:block th:replace="base :: W6CJS"></th:block>
+<th:block th:replace="base :: W7CJS"></th:block>
 
 
 </body>

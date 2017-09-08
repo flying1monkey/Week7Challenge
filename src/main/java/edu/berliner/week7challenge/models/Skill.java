@@ -1,4 +1,4 @@
-package edu.berliner.week6challenge.models;
+package edu.berliner.week7challenge.models;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -19,8 +19,8 @@ public class Skill
     //for "deletions"
     private boolean skillIsArchived;
 
-//    @ManyToOne
-//    private Person skillPerson;
+    @ManyToOne
+    private Person skillPerson;
 
     public Skill()
     {
@@ -67,5 +67,13 @@ public class Skill
         this.skillIsArchived = skillIsArchived;
     }
 
+    public Person getSkillPerson()
+    {
+        return skillPerson;
+    }
 
+    public void setSkillPerson(Person skillPerson)
+    {
+        this.skillPerson = skillPerson;
+    }
 }

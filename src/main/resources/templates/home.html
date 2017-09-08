@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <th:block th:replace="base :: W6CHead"></th:block>
+    <th:block th:replace="base :: W7CHead"></th:block>
     <title>Welcome!</title>
 </head>
 <body class="bg">
-<th:block th:replace="base :: W6CNav"></th:block>
+<th:block th:replace="base :: W7CNav"></th:block>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
@@ -17,7 +17,7 @@
         <div class="col-6 text-center">
                 <p><a type="button" class="btn btn-outline-primary" th:href="@{/addperson.html}">Add person information</a></p>
                 <p><a type="button" class="btn btn-outline-primary" th:href="@{/addeducation.html}">Add education</a></p>
-                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addjob.html}">Add work experience</a></p>
+                <p><a type="button" class="btn btn-outline-primary" th:href="@{/templates/addexp.html}">Add work experience</a></p>
                 <p><a type="button" class="btn btn-outline-primary" th:href="@{/addskill.html}">Add a skill</a></p>
                 <p><a type="button" class="btn btn-outline-primary" th:href="@{/generateresume.html}">Generate a resume</a></p>
                 <p><a type="button" class="btn btn-outline-primary" th:href="@{/listperson.html}">List all people</a></p>
@@ -25,6 +25,6 @@
     </div>
 </div>
 
-<th:block th:replace="base :: W6CJS"></th:block>
+<th:block th:replace="base :: W7CJS"></th:block>
 </body>
 </html>

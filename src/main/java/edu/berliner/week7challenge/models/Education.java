@@ -1,4 +1,4 @@
-package edu.berliner.week6challenge.models;
+package edu.berliner.week7challenge.models;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -22,7 +22,8 @@ public class Education
     //For "deletions"
     private boolean educationIsArchived;
 
-    //@ManyToOne
+    @ManyToOne
+    private Person educationPerson;
 
 
     //Constructor
@@ -81,4 +82,13 @@ public class Education
         this.educationIsArchived = educationIsArchived;
     }
 
+    public Person getEducationPerson()
+    {
+        return educationPerson;
+    }
+
+    public void setEducationPerson(Person educationPerson)
+    {
+        this.educationPerson = educationPerson;
+    }
 }

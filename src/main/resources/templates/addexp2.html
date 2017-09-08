@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!--header css declarations-->
-    <th:block th:replace="base :: W6CHead"/>
+    <th:block th:replace="base :: W7CHead"/>
     <title>Resume Generator</title>
 
 </head>
 <body class="bg">
 <!--Navigation bar-->
-<div th:replace="base :: W6CNav"></div>
+<div th:replace="base :: W7CNav"></div>
 
 <div class="container" >
     <div class="row justify-content-center">
@@ -17,7 +17,7 @@
                 <input type="hidden" th:field="*{jobId}"/>
                 <input type="hidden" th:field="${currentPerson.personId}"/>
                 <div class="col col-sm-12 form-group">
-                    <h1>You're adding or editing a new job item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
+                    <h1>You're adding or editing a new experience item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col col-sm-6 form-group">
@@ -62,6 +62,6 @@
     </div>
 </div>
 
-<th:block th:replace="base :: W6CJS"></th:block>
+<th:block th:replace="base :: W7CJS"></th:block>
 </body>
 </html>

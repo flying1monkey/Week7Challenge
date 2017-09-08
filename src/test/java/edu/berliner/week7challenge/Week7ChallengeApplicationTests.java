@@ -1,4 +1,4 @@
-package edu.berliner.week6challenge;
+package edu.berliner.week7challenge;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Week6challengeApplicationTests {
+public class Week7ChallengeApplicationTests
+{
 
 	@Test
 	public void contextLoads() {
