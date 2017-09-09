@@ -1,12 +1,10 @@
 package edu.berliner.week7challenge;
 
 
-import edu.berliner.week7challenge.models.UserSec;
-import edu.berliner.week7challenge.repositories.UserSecRepository;
+import edu.berliner.week7challenge.repositories.PersonUserRepository;
 import edu.berliner.week7challenge.services.SSUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     private SSUserDetailsService userDetailsService;
 
     @Autowired
-    private UserSecRepository userRepo;
+    private PersonUserRepository userRepo;
 
     @Override
     public UserDetailsService userDetailsServiceBean() throws Exception

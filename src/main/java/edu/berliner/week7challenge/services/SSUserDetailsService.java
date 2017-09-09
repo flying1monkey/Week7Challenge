@@ -1,8 +1,8 @@
 package edu.berliner.week7challenge.services;
 
+import edu.berliner.week7challenge.models.PersonUser;
 import edu.berliner.week7challenge.models.RoleSec;
-import edu.berliner.week7challenge.models.UserSec;
-import edu.berliner.week7challenge.repositories.UserSecRepository;
+import edu.berliner.week7challenge.repositories.PersonUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,9 +20,9 @@ import java.util.Set;
 public class SSUserDetailsService implements UserDetailsService
 {
     @Autowired
-    private UserSecRepository userRepo;
+    private PersonUserRepository userRepo;
 
-    public SSUserDetailsService(UserSecRepository userRepo)
+    public SSUserDetailsService(PersonUserRepository userRepo)
     {
         this.userRepo=userRepo;
     }
@@ -32,7 +32,7 @@ public class SSUserDetailsService implements UserDetailsService
     {
         try
         {
-            UserSec user = userRepo.findByUsername(username);
+            PersonUser user = userRepo.findByUsername(username);
             if(user==null)
             {
                 System.out.println("User not found-this message is for debug only");
@@ -47,7 +47,7 @@ public class SSUserDetailsService implements UserDetailsService
         }
     }
 
-    private Set<GrantedAuthority> getAuthorities(UserSec user)
+    private Set<GrantedAuthority> getAuthorities(PersonUser user)
     {
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         for(RoleSec role : user.getSecRoles()) {

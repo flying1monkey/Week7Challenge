@@ -3,8 +3,6 @@ package edu.berliner.week7challenge.controllers;
 import edu.berliner.week7challenge.models.*;
 import edu.berliner.week7challenge.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,13 +19,12 @@ public class MainController
     @Autowired
     ExperienceRepository experienceRepository;
     @Autowired
-    PersonRepository personRepo;
+    PersonUserRepository personUserRepository;
     @Autowired
     SkillRepository skillRepo;
     @Autowired
     RoleSecRepository roleRepo;
-    @Autowired
-    UserSecRepository userRepo;
+
 
 
     @RequestMapping({"/home","/"})
@@ -39,7 +36,7 @@ public class MainController
     @RequestMapping("/aboutme")
     public String aboutMe(Model model, Principal principal)
     {
-        UserSec user = userRepo.findByUsername(principal.getName());
+        PersonUser user = personUserRepository.findByUsername(principal.getName());
         model.addAttribute("currentuser", user);
         /*
          * UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -53,24 +50,24 @@ public class MainController
 
     /*********************************************
      *
-     * Person pages
+     * PersonUser pages
      *
      *********************************************/
     @GetMapping("/addperson")
     public String addPerson(Model model)
     {
-        model.addAttribute("newPerson", new Person());
+        model.addAttribute("newPerson", new PersonUser());
         return "addperson";
     }
 
     @PostMapping("/addperson")
-    public String submitEducation(@Valid @ModelAttribute("newPerson")Person person, BindingResult result)
+    public String submitEducation(@Valid @ModelAttribute("newPerson")PersonUser person, BindingResult result)
     {
         if(result.hasErrors())
         {
             return "addperson";
         }
-        personRepo.save(person);
+        personUserRepository.save(person);
         return "submitperson";
     }
 
@@ -78,7 +75,7 @@ public class MainController
     public String addPerson(@PathVariable("personId")long personId, Model model)
     {
 
-        model.addAttribute("newPerson", personRepo.findOne(personId));
+        model.addAttribute("newPerson", personUserRepository.findOne(personId));
         return "addperson";
     }
 
@@ -91,7 +88,7 @@ public class MainController
     @GetMapping("/addeducation")
     public String addEducationAskForPerson(Model model)
     {
-        model.addAttribute("people", personRepo.findAll());
+        model.addAttribute("people", personUserRepository.findAll());
         model.addAttribute("currentPerson", null);
         model.addAttribute("newEducation", new Education());
         return "addeducation";
@@ -101,9 +98,9 @@ public class MainController
     public String submitEducationAskForPerson(@RequestParam("selectperson")long currentPersonId, @ModelAttribute("newEducation") Education edu, Model model)
     {
         //edRepo.save(edu);
-        Person current = personRepo.findOne(currentPersonId);
+        PersonUser current = personUserRepository.findOne(currentPersonId);
         current.addEducationToPerson(edu);
-        personRepo.save(current);
+        personUserRepository.save(current);
 
         model.addAttribute("currentPerson", current);
 
@@ -114,7 +111,7 @@ public class MainController
     @GetMapping("/addeducation/{personid}")
     public String addEducationSpecificPerson(@PathVariable("personid") long personid, Model model)
     {
-        model.addAttribute("currentPerson", personRepo.findOne(personid));
+        model.addAttribute("currentPerson", personUserRepository.findOne(personid));
         model.addAttribute("currentPersonId", personid);
         model.addAttribute("newEducation", new Education());
         return "addeducation2";
@@ -127,11 +124,11 @@ public class MainController
         //save newly created education object
         //edRepo.save(edu);
         //get person from passed long and
-        Person current = personRepo.findOne(currentId);
-        //add newly created education object to Person's education set
+        PersonUser current = personUserRepository.findOne(currentId);
+        //add newly created education object to PersonUser's education set
         current.addEducationToPerson(edu);
         //Save person
-        personRepo.save(current);
+        personUserRepository.save(current);
 
         //send education and person objects to submiteducation
         model.addAttribute("currentPerson", current);
@@ -149,7 +146,7 @@ public class MainController
     @GetMapping("/addexp")
     public String addExpAskForPerson(Model model)
     {
-        model.addAttribute("people", personRepo.findAll());
+        model.addAttribute("people", personUserRepository.findAll());
         model.addAttribute("currentPerson", null);
         model.addAttribute("newexp", new Experience());
         return "addexp";
@@ -159,9 +156,9 @@ public class MainController
     public String submitExpAskForPerson(@RequestParam("selectperson")long currentPersonId, @ModelAttribute("newExp") Experience experience, Model model)
     {
         experienceRepository.save(experience);
-        Person current = personRepo.findOne(currentPersonId);
+        PersonUser current = personUserRepository.findOne(currentPersonId);
         current.addExpToPerson(experience);
-        personRepo.save(current);
+        personUserRepository.save(current);
 
         model.addAttribute("currentPerson", current);
 
@@ -171,7 +168,7 @@ public class MainController
     @GetMapping("/addexp/{personid}")
     public String addExpSpecificPerson(@PathVariable("personid") long personid, Model model)
     {
-        model.addAttribute("currentPerson", personRepo.findOne(personid));
+        model.addAttribute("currentPerson", personUserRepository.findOne(personid));
         model.addAttribute("currentPersonId", personid);
         model.addAttribute("newExp", new Experience());
         return "addexp2";
@@ -183,11 +180,11 @@ public class MainController
         //save newly created education object
         experienceRepository.save(experience);
         //get person from passed long and
-        Person current = personRepo.findOne(currentId);
-        //add newly created education object to Person's education set
+        PersonUser current = personUserRepository.findOne(currentId);
+        //add newly created education object to PersonUser's education set
         current.addExpToPerson(experience);
         //Save person
-        personRepo.save(current);
+        personUserRepository.save(current);
 
         //send education and person objects to submitexp
         model.addAttribute("currentPerson", current);
@@ -203,7 +200,7 @@ public class MainController
     @GetMapping("/addskill")
     public String addSkillAskForPerson(Model model)
     {
-        model.addAttribute("people", personRepo.findAll());
+        model.addAttribute("people", personUserRepository.findAll());
         model.addAttribute("currentPerson", null);
         model.addAttribute("newSkill", new Skill());
         return "addskill";
@@ -213,9 +210,9 @@ public class MainController
     public String submitSkillAskForPerson(@RequestParam("selectperson")long currentPersonId, @ModelAttribute("newSkill")Skill skill, Model model)
     {
         skillRepo.save(skill);
-        Person current = personRepo.findOne(currentPersonId);
+        PersonUser current = personUserRepository.findOne(currentPersonId);
         current.addSkillToPerson(skill);
-        personRepo.save(current);
+        personUserRepository.save(current);
 
         model.addAttribute("currentPerson", current);
 
@@ -226,7 +223,7 @@ public class MainController
     @GetMapping("/addskill/{personid}")
     public String addSkillSpecificPerson(@PathVariable("personid") long personid, Model model)
     {
-        model.addAttribute("currentPerson", personRepo.findOne(personid));
+        model.addAttribute("currentPerson", personUserRepository.findOne(personid));
         model.addAttribute("currentPersonId", personid);
         model.addAttribute("newSkill", new Skill());
         return "addskill2";
@@ -239,11 +236,11 @@ public class MainController
         //save newly created education object
         skillRepo.save(skill);
         //get person from passed long and
-        Person current = personRepo.findOne(currentId);
-        //add newly created education object to Person's education set
+        PersonUser current = personUserRepository.findOne(currentId);
+        //add newly created education object to PersonUser's education set
         current.addSkillToPerson(skill);
         //Save person
-        personRepo.save(current);
+        personUserRepository.save(current);
 
         //send skill and person objects to submitskill
         model.addAttribute("currentPerson", current);
@@ -259,13 +256,13 @@ public class MainController
     @RequestMapping("/generateresume/{personid}")
     public String generate(@PathVariable("personid")long personId, Model model)
     {
-        model.addAttribute("person", personRepo.findOne(personId));
+        model.addAttribute("person", personUserRepository.findOne(personId));
         return "generateresume";
     }
     @GetMapping("/generate")
     public String generateGetPerson(Model model)
     {
-        model.addAttribute("allPeople", personRepo.findAll());
+        model.addAttribute("allPeople", personUserRepository.findAll());
         return "generate";
     }
 
@@ -274,7 +271,7 @@ public class MainController
     @RequestMapping("/listperson")
     public String listPeople(Model model)
     {
-        model.addAttribute("allPeople", personRepo.findAll());
+        model.addAttribute("allPeople", personUserRepository.findAll());
         return "showpeople";
     }
 
@@ -292,16 +289,16 @@ public class MainController
     @GetMapping("/signup")
     public String signup(Model model)
     {
-        model.addAttribute("newuser", new UserSec());
+        model.addAttribute("newuser", new PersonUser());
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String addNewUser(@ModelAttribute("newuser") UserSec user, @RequestParam("selectrole") String role)
+    public String addNewUser(@ModelAttribute("newuser") PersonUser user, @RequestParam("selectrole") String role)
     {
 
         user.addSecRole(roleRepo.findBySecRoleName(role)); //addRole is equivalent to my addToCollection()
-        userRepo.save(user);
+        personUserRepository.save(user);
 
         return "home";
     }

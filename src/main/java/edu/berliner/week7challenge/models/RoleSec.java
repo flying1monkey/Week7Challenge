@@ -1,5 +1,6 @@
 package edu.berliner.week7challenge.models;
 
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.ArrayList;
@@ -15,14 +16,14 @@ public class RoleSec
 	private String secRoleName;
 
 	@ManyToMany(mappedBy = "secRoles")
-	private Collection<UserSec> secUsers;
+	private Collection<PersonUser> secUsers;
 
 	public RoleSec()
 	{
-		this.secUsers=new ArrayList<UserSec>();
+		this.secUsers=new ArrayList<PersonUser>();
 	}
 
-	public void addSecUser(UserSec secUser)
+	public void addSecUser(PersonUser secUser)
 	{
 		this.secUsers.add(secUser);
 	}
@@ -47,12 +48,12 @@ public class RoleSec
 		this.secRoleName = secRoleName;
 	}
 
-	public Collection<UserSec> getSecUsers()
+	public Collection<PersonUser> getSecUsers()
 	{
 		return secUsers;
 	}
 
-	public void setSecUsers(Collection<UserSec> secUsers)
+	public void setSecUsers(Collection<PersonUser> secUsers)
 	{
 		this.secUsers = secUsers;
 	}

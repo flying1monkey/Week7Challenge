@@ -20,7 +20,7 @@ public class Skill
     private boolean skillIsArchived;
 
     @ManyToOne
-    private Person skillPerson;
+    private PersonUser skillPersonUser;
 
     public Skill()
     {
@@ -67,13 +67,13 @@ public class Skill
         this.skillIsArchived = skillIsArchived;
     }
 
-    public Person getSkillPerson()
+    public PersonUser getSkillPersonUser()
     {
-        return skillPerson;
+        return skillPersonUser;
     }
 
-    public void setSkillPerson(Person skillPerson)
+    public void setSkillPersonUser(PersonUser skillPersonUser)
     {
-        this.skillPerson = skillPerson;
+        this.skillPersonUser = skillPersonUser;
     }
 }
