@@ -14,6 +14,7 @@ public interface PersonUserRepository extends CrudRepository<PersonUser,Long>
     ArrayList<PersonUser> findAllByPersonFirstNameContains(String s);
     ArrayList<PersonUser> findAllByPersonLastNameContains(String s);
 
+    ArrayList<PersonUser> findAllByEducationSetContains(String skill);
     //PersonUser findAllByPersonFirstNameContainsOrPersonLastNameContains(String nameBit);
 
 }

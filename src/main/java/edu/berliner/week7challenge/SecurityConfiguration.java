@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
                 .antMatchers("/addeducation2","/addexp2","/addskill2","/submiteducation","/submitexp","/submitperson","/submitskill")
                     .hasAnyAuthority("JOBSEEKER")
                 .antMatchers("/addeducation","/addexp","/addskill")
-                    .hasAnyRole("ADMIN")
+                    .hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

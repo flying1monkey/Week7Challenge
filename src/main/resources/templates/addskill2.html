@@ -22,6 +22,7 @@
                 <div class="row justify-content-center">
                     <div class="col col-sm-6 form-group">
                         <input type="hidden" th:field="*{skillId}"/>
+                        <input type="hidden" th:field="${currentPerson.personId}"/>
                         <label for="skill">Skill</label>
                         <input type="text" class="form-control" th:field="*{skillName}" id="skill"
                                placeholder="Juggling" autofocus="autofocus"/>

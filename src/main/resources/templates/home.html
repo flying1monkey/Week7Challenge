@@ -33,21 +33,23 @@
         <div class="col-6 text-center">
             <p><a type="button" class="btn btn-outline-primary" th:href="@{/aboutme}">See my information</a></p>
 
-            <!--<span th:if="${currentuser}!=null">
-            <p><a type="button" class="btn btn-outline-primary" th:href="@{/addeducation/{personid}(personid=${currentuser.personId})}">Add education</a></p>
+            <div th:if="${currentuser}!=null">
+            <p><a type="button" class="btn btn-outline-primary"
+                  th:href="@{/addeducation/{personid}(personid=${currentuser.personId})}">Add education</a></p>
             <p><a type="button" class="btn btn-outline-primary"
                   th:href="@{/addexp/{personid}(personid=${currentuser.personId})}">Add work experience</a></p>
             <p><a type="button" class="btn btn-outline-primary"
                   th:href="@{/addskill/{personid}(personid=${currentuser.personId})}">Add a skill</a></p>
             <p><a type="button" class="btn btn-outline-primary"
                   th:href="@{/generateresume/{personid}(personid=${currentuser.personId})}">Generate my resume</a></p>
-                </span>-->
+                </div>
         </div>
     </div>
     <div sec:authorize="isAuthenticated()" class="row justify-content-center">
         <div class="col-6 text-center">
             <p><a type="button" class="btn btn-outline-primary" th:href="@{/generate}">View resumes</a></p>
             <p><a type="button" class="btn btn-outline-primary" th:href="@{/listperson}">List all people</a></p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/showjobs}">List all jobs</a></p>
             <p><a type="button" class="btn btn-outline-primary" th:href="@{/search}">Search</a></p>
             <p><a type="button" class="btn btn-outline-primary" th:href="@{/logout}">Logout</a></p>
         </div>

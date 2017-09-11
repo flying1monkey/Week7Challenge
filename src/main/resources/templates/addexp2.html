@@ -13,8 +13,8 @@
 <div class="container" >
     <div class="row justify-content-center">
         <div class="col col-sm-10 form-group">
-            <form action="#" th:action="@{/addjob2}" th:object="${newJob}" method="post">
-                <input type="hidden" th:field="*{jobId}"/>
+            <form action="#" th:action="@{/addexp2}" th:object="${newExp}" method="post">
+                <input type="hidden" th:field="*{expId}"/>
                 <input type="hidden" th:field="${currentPerson.personId}"/>
                 <div class="col col-sm-12 form-group">
                     <h1>You're adding or editing a new experience item for <span th:text="${currentPerson.personFirstName}+' '+${currentPerson.personLastName}"/></h1>
@@ -22,34 +22,34 @@
                 <div class="row justify-content-center">
                     <div class="col col-sm-6 form-group">
                         <label for="co">Company</label>
-                        <input type="text" class="form-control" th:field="*{jobCompany}" id="co" placeholder="Company" autofocus="autofocus"/>
+                        <input type="text" class="form-control" th:field="*{expCompany}" id="co" placeholder="Company" autofocus="autofocus"/>
                         <!--<span th:if="${#fields.hasErrors('company')}" th:errors="*{company}"/>-->
                     </div>
                     <div class="col col-sm-6 form-group">
-                        <label for="jobtitle">Title</label>
-                        <input type="text" class="form-control" th:field="*{jobTitle}" id="jobtitle" placeholder="Job title"/>
+                        <label for="exptitle">Title</label>
+                        <input type="text" class="form-control" th:field="*{expTitle}" id="exptitle" placeholder="Job title"/>
                         <!--<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"/>-->
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col col-sm-6 form-group">
                         <label for="sdate">Start Date</label>
-                        <input type="date" class="form-control" th:field="*{jobStartDate}" id="sdate"/>
+                        <input type="date" class="form-control" th:field="*{expStartDate}" id="sdate"/>
                         <!--<span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"/>-->
                     </div>
                     <div class="col col-sm-6 form-group">
                         <label for="edate">End Date</label>
-                        <input type="date" class="form-control" th:field="*{jobEndDate}" id="edate"/>
+                        <input type="date" class="form-control" th:field="*{expEndDate}" id="edate"/>
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col col-sm-6 form-group">
                         <label for="duty1">Job Duty</label>
-                        <input type="text" class="form-control" th:field="*{jobFirstDuty}" id="duty1" placeholder="First duty"/>
+                        <input type="text" class="form-control" th:field="*{expFirstDuty}" id="duty1" placeholder="First duty"/>
                     </div>
                     <div class="col col-sm-6 form-group">
                         <label for="duty2">Job Duty</label>
-                        <input type="text" class="form-control" th:field="*{jobSecondDuty}" id="duty2" placeholder="Second duty"/>
+                        <input type="text" class="form-control" th:field="*{expSecondDuty}" id="duty2" placeholder="Second duty"/>
                     </div>
                 </div>
                 <div class="row justify-content-center">

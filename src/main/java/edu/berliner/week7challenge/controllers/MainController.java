@@ -39,6 +39,10 @@ public class MainController
         {
             model.addAttribute("currentuser", personUserRepository.findByUsername(principal.getName()));
         }
+        else
+        {
+            model.addAttribute("currentuser", null);
+        }
         return "home";
     }
 
@@ -125,6 +129,8 @@ public class MainController
 
         //get person from passed long and
         PersonUser current = personUserRepository.findOne(currentId);
+
+
         //add newly created education object to PersonUser's education set
         current.addEducationToPerson(edu);
         //Save person
@@ -372,8 +378,9 @@ public class MainController
         return "showpeople";
     }
     @PostMapping("/searchschool")
-    public String searchSchool(@ModelAttribute("seachschools") Education edu, Model model)
+    public String searchSchool(@ModelAttribute("searchschools") Education edu, Model model)
     {
+        //NOT WORKING
         ArrayList<Education> tempEdu = edRepo.findAllByEducationSchoolName(edu.getEducationSchoolName());
         ArrayList<PersonUser> people=new ArrayList<PersonUser>();
 
@@ -388,8 +395,11 @@ public class MainController
     @RequestMapping("/myjobs")
     public String myJobs(@ModelAttribute ("search") Job job, Model model, Principal principal)
     {
+//        NOT WORKING
         PersonUser current = personUserRepository.findByUsername(principal.getName());
         Set<Skill> tempSkill = current.getSkillSet();
+
+        ArrayList<PersonUser> test = personUserRepository.findAllByEducationSetContains("English");
 
         model.addAttribute("Jobs", jobRepo.findAll());
         return "showJobs";

@@ -21,8 +21,8 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${newSkill.skillName}"></td>
-                    <td th:text="${newSkill.skillLevel}"></td>
+                    <td th:text="${currentSkill.skillName}"></td>
+                    <td th:text="${currentSkill.skillLevel}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -30,7 +30,8 @@
     </div>
     <div class="row justify-content-center">
         <a class="btn btn-primary" th:href="@{/addskill/{id}(id=${currentPerson.personId})}" role="button">Add another skill</a>
-        <a class="btn btn-primary" th:href="@{/addjob/{id}(id=${currentPerson.personId})}" role="button">Add another experience</a>
+        <a class="btn btn-primary" th:href="@{/addexp/{id}(id=${currentPerson.personId})}" role="button">Add an experience</a>
+        <a class="btn btn-primary" th:href="@{/addeducation/{id}(id=${currentPerson.personId})}" role="button">Add a school</a>
 
     </div>
 </div>
