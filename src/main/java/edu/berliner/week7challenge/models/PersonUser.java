@@ -36,9 +36,12 @@ public class PersonUser
     @NotEmpty
     private String password;
 
+    @Column(name="public")
+    private boolean resumeIsPublic;
+
     //for "deletions"
     @Column(name="enabled")
-    private boolean personIsArchived;
+    private boolean personIsEnabled;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Education> educationSet;
@@ -59,7 +62,19 @@ public class PersonUser
         this.experienceSet = new HashSet<Experience>();
         this.skillSet = new HashSet<Skill>();
         this.secRoles=new ArrayList<RoleSec>();
-        setPersonIsArchived(false);
+        this.personIsEnabled=true;
+        this.resumeIsPublic=true;
+    }
+    public PersonUser(String personFirstName, String personLastName, String personEmail, String username, String password, boolean resumeIsPublic)
+    {
+        this.personFirstName=personFirstName;
+        this.personLastName=personLastName;
+        this.personEmail=personEmail;
+        this.username=username;
+        this.password=password;
+        this.secRoles=new ArrayList<RoleSec>();
+        this.personIsEnabled=true;
+        this.resumeIsPublic=resumeIsPublic;
     }
 
     public void addEducationToPerson(Education edu)
@@ -134,12 +149,12 @@ public class PersonUser
         this.password = password;
     }
 
-    public boolean isPersonIsArchived() {
-        return personIsArchived;
+    public boolean isPersonIsEnabled() {
+        return personIsEnabled;
     }
 
-    public void setPersonIsArchived(boolean personIsArchived) {
-        this.personIsArchived = personIsArchived;
+    public void setPersonIsEnabled(boolean personIsEnabled) {
+        this.personIsEnabled = personIsEnabled;
     }
 
     public Set<Education> getEducationSet() {

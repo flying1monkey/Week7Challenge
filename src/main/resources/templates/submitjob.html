@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W7CHead"/>
+    <title>Resume Generator</title>
+</head>
+<body class="bg">
+<!--Navigation bar-->
+<div th:replace="base :: W7CNav"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-8">
+            <h1>Job posting:</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Employer/Company</th>
+                    <th>Salary Range</th>
+                    <th>Description</th>
+                    <th>Skills</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${newJob.jobTitle}"></td>
+                    <td th:text="${newJob.jobEmployer}"></td>
+                    <td th:text="${newJob.jobSalaryRange}"></td>
+                    <td th:text="${newJob.jobDescription}"></td>
+                    <td th:text="${newJob.jobSkills}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <a class="btn btn-primary" th:href="@{/addjob}" role="button">Post a job</a>
+    </div>
+</div>
+
+<th:block th:replace="base :: W7CJS"></th:block>
+
+</body>
+</html>

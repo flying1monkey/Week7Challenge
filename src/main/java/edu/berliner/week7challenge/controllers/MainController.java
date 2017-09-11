@@ -19,6 +19,8 @@ public class MainController
     @Autowired
     ExperienceRepository experienceRepository;
     @Autowired
+    JobRepository jobRepo;
+    @Autowired
     PersonUserRepository personUserRepository;
     @Autowired
     SkillRepository skillRepo;
@@ -30,6 +32,7 @@ public class MainController
     @RequestMapping({"/home","/"})
     public String welcomePage()
     {
+        setup();
         return "home";
     }
 
@@ -247,7 +250,38 @@ public class MainController
         model.addAttribute("currentSkill", skill);
         return "submitskill";
     }
+    /*********************************************
+     *
+     * Job posting pages
+     *
+     *********************************************/
+    @GetMapping("/addjob")
+    public String addJob(Model model)
+    {
+        model.addAttribute("newJob", new Job());
+        return "addjob";
+    }
 
+    @PostMapping("/addjob")
+    public String submitJob(@ModelAttribute("newJob") Job job)
+    {
+        jobRepo.save(job);
+        return "submitJob";
+    }
+
+    @RequestMapping("/showjobs")
+    public String showJobs(Model model)
+    {
+        model.addAttribute("Jobs", jobRepo.findAll());
+        return "showjobs";
+    }
+
+    @RequestMapping("/submitjob/{jobId}")
+    public String detailJob(@PathVariable("jobId")long jobId, Model model)
+    {
+        model.addAttribute("newJob", jobRepo.findOne(jobId));
+        return "submitJob";
+    }
     /*********************************************
      *
      * Resume/final pages
@@ -265,8 +299,6 @@ public class MainController
         model.addAttribute("allPeople", personUserRepository.findAll());
         return "generate";
     }
-
-
 
     @RequestMapping("/listperson")
     public String listPeople(Model model)
@@ -301,5 +333,29 @@ public class MainController
         personUserRepository.save(user);
 
         return "home";
+    }
+
+    public void setup()
+    {
+        if(roleRepo.count()==0)
+        {
+            RoleSec admin=new RoleSec("ADMIN");
+            RoleSec jobseeker=new RoleSec("JOBSEEKER");
+            RoleSec recruiter=new RoleSec("RECRUITER");
+            roleRepo.save(admin);
+            roleRepo.save(jobseeker);
+            roleRepo.save(recruiter);
+            System.out.println("Added roles");
+        }
+        if (personUserRepository.count()==0)
+        {
+            PersonUser admin = new PersonUser("AdminF", "AdminL", "admin@admin.com", "admin","password", false);
+            admin.addSecRole(roleRepo.findBySecRoleName("ADMIN"));
+            admin.addSecRole(roleRepo.findBySecRoleName("JOBSEEKER"));
+            admin.addSecRole(roleRepo.findBySecRoleName("RECRUITER"));
+            personUserRepository.save(admin);
+            System.out.println("Added admin");
+        }
+        System.out.println("Setup complete");
     }
 }

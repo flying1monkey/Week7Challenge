@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--header css declarations-->
+    <th:block th:replace="base :: W7CHead"/>
+    <title>Resume Generator</title>
+
+</head>
+<body class="bg">
+<!--Navigation bar-->
+<div th:replace="base :: W7CNav"></div>
+
+
+<!--input-->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-10 form-group">
+            <form action="#" th:action="@{/addjob}" th:object="${newJob}" method="post">
+                <input type="hidden" th:field="*{jobId}"/>
+                <div class="row justify-content-center">
+                    <div class="col col-sm-12 form-group">
+                        <h1>Enter information for job posting </h1>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col col-sm-4 form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" th:field="*{jobTitle}" id="title" autofocus="autofocus"/>
+                        <!--<span th:if="${#fields.hasErrors('skillName')}" th:errors="*{skillName}"/>-->
+                    </div>
+                    <div class="col col-sm-4 form-group">
+                        <label for="employer">Employer</label>
+                        <input type="text" class="form-control" th:field="*{jobEmployer}" id="employer"/>
+                        <!--<span th:if="${#fields.hasErrors('skillLevel')}" th:errors="*{skillLevel}"/>-->
+                    </div>
+                    <div class="col col-sm-4 form-group">
+                        <label for="salary">Salary Range</label>
+                        <input type="text" class="form-control" th:field="*{jobSalaryRange}" id="salary"/>
+                        <!--<span th:if="${#fields.hasErrors('skillLevel')}" th:errors="*{skillLevel}"/>-->
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col col-sm-12">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" th:field="*{jobDescription}" id="description"/>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col col-sm-12">
+                        <label for="skills">Skills</label>
+                        <input type="text" class="form-control" th:field="*{jobSkills}" id="skills"/>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col col-sm-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="base :: W7CJS"></th:block>
+
+</body>
+</html>

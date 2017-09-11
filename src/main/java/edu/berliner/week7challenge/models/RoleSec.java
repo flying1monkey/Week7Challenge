@@ -18,16 +18,25 @@ public class RoleSec
 	@ManyToMany(mappedBy = "secRoles")
 	private Collection<PersonUser> secUsers;
 
+	//Constructors
 	public RoleSec()
 	{
 		this.secUsers=new ArrayList<PersonUser>();
 	}
 
+	public RoleSec(String role)
+	{
+		this.secRoleName=role;
+		this.secUsers=new ArrayList<PersonUser>();
+	}
+
+	//Methods
 	public void addSecUser(PersonUser secUser)
 	{
 		this.secUsers.add(secUser);
 	}
 
+	//Getters/Setters
 	public long getSecRoleId()
 	{
 		return secRoleId;
