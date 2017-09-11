@@ -38,7 +38,7 @@ public class SSUserDetailsService implements UserDetailsService
                 System.out.println("User not found-this message is for debug only");
                 return null;
             }
-            System.out.println("Username: "+user.toString());
+            //System.out.println("Username: "+user.toString());
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user));
         }
         catch (Exception e)
@@ -54,7 +54,7 @@ public class SSUserDetailsService implements UserDetailsService
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getSecRoleName());
             authorities.add(grantedAuthority);
         }
-        System.out.println("user authorities are " + authorities.toString());
+        //System.out.println("user authorities are " + authorities.toString());
         return authorities;
     }
 }

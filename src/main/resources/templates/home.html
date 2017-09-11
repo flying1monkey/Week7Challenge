@@ -13,20 +13,53 @@
             <p>What would you like to do now?</p>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div sec:authorize="hasAuthority('ADMIN')" class="row justify-content-center">
         <div class="col-6 text-center">
-                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addperson.html}">Add person information</a></p>
-                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addeducation.html}">Add education</a></p>
-                <p><a type="button" class="btn btn-outline-primary" th:href="@{/templates/addexp.html}">Add work experience</a></p>
-                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addskill.html}">Add a skill</a></p>
-                <p><a type="button" class="btn btn-outline-primary" th:href="@{/generateresume.html}">Generate a resume</a></p>
-                <p><a type="button" class="btn btn-outline-primary" th:href="@{/listperson.html}">List all people</a></p>
-                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addseeker}">Auto-add a job seeker</a></p>
-                <p><a type="button" class="btn btn-outline-primary" th:href="@{/addrecruiter}">Auto-add a recruiter</a></p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/addseeker}">Auto-add a job seeker</a></p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/addrecruiter}">Auto-add a recruiter</a></p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/addeducation}">Add education for someone</a>
+            </p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/addexp}">Add work experience for someone</a>
+            </p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/addskill}">Add a skill for someone</a></p>
+        </div>
+    </div>
+    <div sec:authorize="hasAuthority('RECRUITER')" class="row justify-content-center">
+        <div class="col-6 text-center">
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/addjob}">Add a new job posting</a></p>
+        </div>
+    </div>
+    <div sec:authorize="hasAuthority('JOBSEEKER')" class="row justify-content-center">
+        <div class="col-6 text-center">
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/aboutme}">See my information</a></p>
+
+            <!--<span th:if="${currentuser}!=null">
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/addeducation/{personid}(personid=${currentuser.personId})}">Add education</a></p>
+            <p><a type="button" class="btn btn-outline-primary"
+                  th:href="@{/addexp/{personid}(personid=${currentuser.personId})}">Add work experience</a></p>
+            <p><a type="button" class="btn btn-outline-primary"
+                  th:href="@{/addskill/{personid}(personid=${currentuser.personId})}">Add a skill</a></p>
+            <p><a type="button" class="btn btn-outline-primary"
+                  th:href="@{/generateresume/{personid}(personid=${currentuser.personId})}">Generate my resume</a></p>
+                </span>-->
+        </div>
+    </div>
+    <div sec:authorize="isAuthenticated()" class="row justify-content-center">
+        <div class="col-6 text-center">
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/generate}">View resumes</a></p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/listperson}">List all people</a></p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/search}">Search</a></p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/logout}">Logout</a></p>
+        </div>
+    </div>
+    <div sec:authorize="isAnonymous()" class="row justify-content-center">
+        <div class="col-6 text-center">
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/login}">Login</a></p>
+            <p><a type="button" class="btn btn-outline-primary" th:href="@{/signup}">Sign up</a></p>
         </div>
     </div>
 </div>
 
-<th:block th:replace="base :: W7CJS"></th:block>
+    <th:block th:replace="base :: W7CJS"></th:block>
 </body>
 </html>

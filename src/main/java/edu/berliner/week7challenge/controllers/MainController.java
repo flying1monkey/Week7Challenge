@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Set;
 
 @Controller
 public class MainController
@@ -30,8 +32,9 @@ public class MainController
 
 
     @RequestMapping({"/home","/"})
-    public String welcomePage()
+    public String welcomePage(Model model, Principal principal)
     {
+        model.addAttribute("currentuser", personUserRepository.findByUsername(principal.getName()));
         setup();
         return "home";
     }
@@ -74,6 +77,7 @@ public class MainController
         model.addAttribute("newuser", personUserRepository.findOne(personId));
         return "editperson";
     }
+
     /*********************************************
      *
      * Education pages
@@ -311,14 +315,81 @@ public class MainController
     }
 
     @PostMapping("/signup")
-    public String addNewUser(@ModelAttribute("newuser") PersonUser user, @RequestParam("selectrole") String role, Model model)
+    public String addNewUser(@Valid @ModelAttribute("newuser") PersonUser user, @RequestParam("selectrole") String role, Model model, BindingResult result)
     {
-
+        if(result.hasErrors())
+        {
+            return "signup";
+        }
         user.addSecRole(roleRepo.findBySecRoleName(role));
         personUserRepository.save(user);
 
         model.addAttribute("currentuser",user);
         return "aboutme";
+    }
+    /*********************************************
+     *
+     * Search
+     *
+     *********************************************/
+    @GetMapping("/search")
+    public String search(Model model)
+    {
+        model.addAttribute("searchjob",new Job());
+        model.addAttribute("searchpeople",new PersonUser());
+        model.addAttribute("searchschools",new Education());
+        return "search";
+    }
+
+    @PostMapping("/searchdesc")
+    public String searchJobs(@ModelAttribute("searchjob") Job job, Model model)
+    {
+        model.addAttribute("Jobs", jobRepo.findAllByJobDescriptionContains(job.getJobDescription()));
+        return "showjobs";
+    }
+    @PostMapping("/searchco")
+    public String searchCompany(@ModelAttribute("searchjob") Job job, Model model)
+    {
+        model.addAttribute("Jobs", jobRepo.findAllByJobEmployerContains(job.getJobEmployer()));
+        return "showjobs";
+    }
+    @PostMapping("/searchname")
+    public String searchCompany(@ModelAttribute("searchpeople") PersonUser person, Model model)
+    {
+        ArrayList<PersonUser> firstnames=new ArrayList<PersonUser>();
+        ArrayList<PersonUser> lastnames=new ArrayList<PersonUser>();
+        firstnames=personUserRepository.findAllByPersonFirstNameContains(person.getPersonFirstName());
+        lastnames=personUserRepository.findAllByPersonLastNameContains(person.getPersonFirstName());
+        for(PersonUser tempperson:lastnames)
+        {
+            firstnames.add(tempperson);
+        }
+
+        model.addAttribute("allPeople", lastnames);
+        return "showpeople";
+    }
+    @PostMapping("/searchschool")
+    public String searchSchool(@ModelAttribute("seachschools") Education edu, Model model)
+    {
+        ArrayList<Education> tempEdu = edRepo.findAllByEducationSchoolName(edu.getEducationSchoolName());
+        ArrayList<PersonUser> people=new ArrayList<PersonUser>();
+
+        for(Education ed:tempEdu)
+        {
+           //find person that the ed item belongs to
+
+        }
+        model.addAttribute("allPeople", personUserRepository.findAll());
+        return "showpeople";
+    }
+    @RequestMapping("/myjobs")
+    public String myJobs(@ModelAttribute ("search") Job job, Model model, Principal principal)
+    {
+        PersonUser current = personUserRepository.findByUsername(principal.getName());
+        Set<Skill> tempSkill = current.getSkillSet();
+
+        model.addAttribute("Jobs", jobRepo.findAll());
+        return "showJobs";
     }
     /*********************************************
      *
@@ -346,8 +417,6 @@ public class MainController
             personUserRepository.save(admin);
             System.out.println("Added admin");
         }
-        System.out.println(jobRepo.findJobsByJobEmployerContains("J"));
-        //System.out.println(personUserRepository.findAllByPersonFirstNameContainsOrPersonLastNameContains("ad"));
     }
     @GetMapping("/addseeker")
     public String addJobseeker()
