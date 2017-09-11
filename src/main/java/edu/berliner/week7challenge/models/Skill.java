@@ -19,8 +19,8 @@ public class Skill
     //for "deletions"
     private boolean skillIsArchived;
 
-    @ManyToOne
-    private PersonUser skillPersonUser;
+//    @ManyToOne
+//    private PersonUser skillPersonUser;
 
     public Skill()
     {
@@ -67,13 +67,13 @@ public class Skill
         this.skillIsArchived = skillIsArchived;
     }
 
-    public PersonUser getSkillPersonUser()
-    {
-        return skillPersonUser;
-    }
-
-    public void setSkillPersonUser(PersonUser skillPersonUser)
-    {
-        this.skillPersonUser = skillPersonUser;
-    }
+//    public PersonUser getSkillPersonUser()
+//    {
+//        return skillPersonUser;
+//    }
+//
+//    public void setSkillPersonUser(PersonUser skillPersonUser)
+//    {
+//        this.skillPersonUser = skillPersonUser;
+//    }
 }

@@ -27,8 +27,8 @@ public class Experience
     //for "deletions"
     private boolean expIsArchived;
 
-    @ManyToOne
-    private PersonUser experiencePersonUser;
+//    @ManyToOne
+//    private PersonUser experiencePersonUser;
 
     //Constructor
     public Experience()
@@ -116,13 +116,13 @@ public class Experience
         this.expIsArchived = expIsArchived;
     }
 
-    public PersonUser getExperiencePersonUser()
-    {
-        return experiencePersonUser;
-    }
-
-    public void setExperiencePersonUser(PersonUser experiencePersonUser)
-    {
-        this.experiencePersonUser = experiencePersonUser;
-    }
+//    public PersonUser getExperiencePersonUser()
+//    {
+//        return experiencePersonUser;
+//    }
+//
+//    public void setExperiencePersonUser(PersonUser experiencePersonUser)
+//    {
+//        this.experiencePersonUser = experiencePersonUser;
+//    }
 }

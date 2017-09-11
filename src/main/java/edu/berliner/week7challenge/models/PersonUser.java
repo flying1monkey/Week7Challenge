@@ -43,13 +43,13 @@ public class PersonUser
     @Column(name="enabled")
     private boolean personIsEnabled;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     public Set<Education> educationSet;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     public Set<Experience> experienceSet;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     public Set<Skill> skillSet;
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -22,8 +22,8 @@ public class Education
     //For "deletions"
     private boolean educationIsArchived;
 
-    @ManyToOne
-    private PersonUser educationPersonUser;
+//    @ManyToOne
+//    private PersonUser educationPersonUser;
 
 
     //Constructor
@@ -82,13 +82,13 @@ public class Education
         this.educationIsArchived = educationIsArchived;
     }
 
-    public PersonUser getEducationPersonUser()
-    {
-        return educationPersonUser;
-    }
-
-    public void setEducationPersonUser(PersonUser educationPersonUser)
-    {
-        this.educationPersonUser = educationPersonUser;
-    }
+//    public PersonUser getEducationPersonUser()
+//    {
+//        return educationPersonUser;
+//    }
+//
+//    public void setEducationPersonUser(PersonUser educationPersonUser)
+//    {
+//        this.educationPersonUser = educationPersonUser;
+//    }
 }
