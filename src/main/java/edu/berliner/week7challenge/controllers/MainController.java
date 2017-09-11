@@ -34,8 +34,11 @@ public class MainController
     @RequestMapping({"/home","/"})
     public String welcomePage(Model model, Principal principal)
     {
-        model.addAttribute("currentuser", personUserRepository.findByUsername(principal.getName()));
         setup();
+        if(principal!=null)
+        {
+            model.addAttribute("currentuser", personUserRepository.findByUsername(principal.getName()));
+        }
         return "home";
     }
 
