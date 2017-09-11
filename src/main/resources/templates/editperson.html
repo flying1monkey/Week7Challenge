@@ -21,19 +21,19 @@
                     <div class="col col-sm-6 form-group">
                         <input type="hidden" th:field="*{personId}"/>
                         <label for="fname">First Name: </label>
-                        <input type="text" class="form-control" th:field="*{firstName}" id="fname" placeholder="Jane"
+                        <input type="text" class="form-control" th:field="*{personFirstName}" id="fname" placeholder="Jane"
                                autofocus="autofocus"/>
                     </div>
                     <div class="col col-sm-6 form-group">
                         <label for="lname">Last Name: </label>
-                        <input type="text" class="form-control" th:field="*{lastName}" id="lname" placeholder="Doe"/>
+                        <input type="text" class="form-control" th:field="*{personLastName}" id="lname" placeholder="Doe"/>
                         <!--<span th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"/>-->
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col col-sm-12 form-group">
                         <label for="email">Email Address: </label>
-                        <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="jane@doe.com"/>
+                        <input type="email" class="form-control" th:field="*{personEmail}" id="email" placeholder="jane@doe.com"/>
                         <!--<span th:if="${#fields.hasErrors('gradYear')}" th:errors="*{gradYear}"/>-->
                     </div>
                 </div>
@@ -55,11 +55,7 @@
                 <div class="row justify-content-center">
 
                     <div class="col col-sm-6 form-group">
-                        <label>I am a: </label>
-                        <select name="selectrole">
-                            <option value="JOBSEEKER">Job seeker</option>
-                            <option value="RECRUITER">Recruiter</option>
-                        </select>
+                        Your role:<span th:each="role : ${secRoles}" th:text="${role.secRoleName}"></span>
                     </div>
                 </div>
                 <div class="row justify-content-center">

@@ -33,6 +33,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
         http
                 .authorizeRequests()
                 .antMatchers("/", "/css/**", "/js/**","/img/**","/signup","/home").permitAll()
+                .antMatchers("/addjob").hasAuthority("ADMIN")
+                .antMatchers("/addeducation2","/addexp2","/addskill2","/submiteducation","/submitexp","/submitperson","/submitskill")
+                    .hasAnyAuthority("JOBSEEKER")
+
+//                .antMatchers("/addeducation","/addexp","/addskill")
+//                    .hasAnyRole("ADMIN").anyRequest().authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
@@ -43,4 +49,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
                 .and()
                 .httpBasic();
     }
+
 }

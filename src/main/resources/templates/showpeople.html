@@ -28,7 +28,7 @@
                     <td th:text="${person.personFirstName} + ' ' + ${person.personLastName}"></td>
                     <td><a th:href="@{/generateresume/{personId}(personId=${person.personId})}">See resume</a></td>
                     <td>
-                        <a th:href="@{/addperson/{personId}(personId=${person.personId})}">Edit person</a> |
+                        <a th:href="@{/editperson/{personId}(personId=${person.personId})}">Edit person</a> |
                         <a th:href="@{/deleteperson/{personId}(personId=${person.personId})}">Delete person</a>
                     </td>
                     <!--<th:block th:with="id=${42774564}">-->

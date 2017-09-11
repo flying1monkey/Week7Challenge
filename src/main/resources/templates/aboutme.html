@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="col col-sm-6 form-group">
             <h1>Roboresume</h1>
-            <h3 th:text="'Hello '+${currentuser.firstName}"></h3>
+            <h3 th:text="'Hello '+${currentuser.personFirstName} +' '+${currentuser.personLastName}"></h3>
             <div class="row justify-content-center">
                 <div class="col col-sm-12 form-group">
                     Your username:<span th:text="${currentuser.username}"></span>

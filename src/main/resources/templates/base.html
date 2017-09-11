@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:fragment="W7CHead">
     <meta charset="UTF-8"/>
@@ -20,18 +20,19 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" th:href="@{/home}">Home</a>
-                <a class="nav-item nav-link" th:href="@{/addperson}">New person</a>
+                <a class="nav-item nav-link" th:href="@{/aboutme}">About me</a>
                 <a class="nav-item nav-link" th:href="@{/addeducation}">Add education</a>
                 <a class="nav-item nav-link" th:href="@{/addexp}">Add experience</a>
                 <a class="nav-item nav-link" th:href="@{/addskill}">Add skill</a>
-                <a class="nav-item nav-link" th:href="@{/generate}">Generate resume</a>
-                <a class="nav-item nav-link" th:href="@{/listperson}">List people</a>
+                <a class="nav-item nav-link" th:href="@{/generate}">Generate your resume</a>
+                <a class="nav-item nav-link" th:href="@{/listperson}">List all people</a>
+                <div sec:authorize="hasAuthority('RECRUITER')">
+                    <a class="nav-item nav-link" th:href="@{/addjob}">Post a job</a>
+                </div>
+                <a class="nav-item nav-link" th:href="@{/showjobs}">View all jobs</a>
                 <a class="nav-item nav-link" th:href="@{/signup}">Sign up</a>
                 <a class="nav-item nav-link" th:href="@{/login}">Sign in</a>
                 <a class="nav-item nav-link" th:href="@{/logout}">Sign out</a>
-                <a class="nav-item nav-link" th:href="@{/aboutme}">About me</a>
-                <a class="nav-item nav-link" th:href="@{/addjob}">Post a job</a>
-                <a class="nav-item nav-link" th:href="@{/showjobs}">View all jobs</a>
             </div>
         </div>
     </nav>

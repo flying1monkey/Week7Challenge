@@ -10,4 +10,6 @@ public interface PersonUserRepository extends CrudRepository<PersonUser,Long>
     //Iterable<PersonUser> findByPersonIsArchivedFalse();  Doesn't work
     PersonUser findByUsername(String username);
 
+    //PersonUser findAllByPersonFirstNameContainsOrPersonLastNameContains(String nameBit);
+
 }
